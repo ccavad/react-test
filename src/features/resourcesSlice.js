@@ -22,7 +22,7 @@ const initialState = {
       perTurn: 0,
     },
     army: 5,
-    defence: 10,
+    // defence: 10,
   },
 };
 

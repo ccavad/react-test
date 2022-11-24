@@ -23,6 +23,7 @@ function App() {
     x: "",
     y: "",
     name: "",
+    zone: "",
   });
 
   const Regions = useSelector((state) => state.regions.value);

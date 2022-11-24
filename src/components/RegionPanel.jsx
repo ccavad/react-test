@@ -17,13 +17,13 @@ function RegionPanel({ id }) {
     <div>
       <h1>{regions[id].ad}</h1>
       {regions[id].zone === "" && <ZoneSelect id={id} />}
-      {regions[id].zone === "agriculture" && <Agriculture />}
-      {regions[id].zone === "culture" && <Culture />}
-      {regions[id].zone === "military" && <Military />}
-      {regions[id].zone === "oil" && <OilZone />}
-      {regions[id].zone === "tourism" && <Tourism />}
-      {regions[id].zone === "trade" && <Trade />}
-      {regions[id].zone === "social" && <Social />}
+      {regions[id].zone === "kənd təsərrüfatı" && <Agriculture />}
+      {regions[id].zone === "mədəniyyət zonası" && <Culture />}
+      {regions[id].zone === "hərbi zona" && <Military />}
+      {regions[id].zone === "neft sektoru" && <OilZone />}
+      {regions[id].zone === "turizm sektoru" && <Tourism />}
+      {regions[id].zone === "ticarət zonası" && <Trade />}
+      {regions[id].zone === "sosial zona" && <Social />}
     </div>
   );
 }
@@ -43,31 +43,31 @@ function ZoneSelect({ id }) {
     <>
       <h2>Bu regionda nə sektoru quracaqsan?</h2>
       <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-        <BtnGeneral onClick={() => zoneHandler("agriculture", 30)}>
+        <BtnGeneral onClick={() => zoneHandler("kənd təsərrüfatı", 30)}>
           Kənd təsərrüfatı
           <div className="btn-price">30</div>
         </BtnGeneral>
-        <BtnGeneral onClick={() => zoneHandler("oil", 100)}>
-          Neft
+        <BtnGeneral onClick={() => zoneHandler("neft sektoru", 100)}>
+          Neft Sektoru
           <div className="btn-price">100</div>
         </BtnGeneral>
-        <BtnGeneral onClick={() => zoneHandler("military", 60)}>
+        <BtnGeneral onClick={() => zoneHandler("hərbi zona", 60)}>
           Hərbi Zona
           <div className="btn-price">60</div>
         </BtnGeneral>
-        <BtnGeneral onClick={() => zoneHandler("culture", 30)}>
+        <BtnGeneral onClick={() => zoneHandler("mədəniyyət zonası", 30)}>
           Mədəniyyət Zonası
           <div className="btn-price">30</div>
         </BtnGeneral>
-        <BtnGeneral onClick={() => zoneHandler("tourism", 80)}>
-          Turizm Zonası
+        <BtnGeneral onClick={() => zoneHandler("turizm sektoru", 80)}>
+          Turizm Sektoru
           <div className="btn-price">80</div>
         </BtnGeneral>
-        <BtnGeneral onClick={() => zoneHandler("trade", 100)}>
+        <BtnGeneral onClick={() => zoneHandler("ticarət zonası", 100)}>
           Ticarət Zonası
           <div className="btn-price">100</div>
         </BtnGeneral>
-        <BtnGeneral onClick={() => zoneHandler("social", 50)}>
+        <BtnGeneral onClick={() => zoneHandler("sosial zona", 50)}>
           Sosial Zona
           <div className="btn-price">50</div>
         </BtnGeneral>

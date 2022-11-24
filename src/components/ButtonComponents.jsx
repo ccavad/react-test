@@ -66,18 +66,19 @@ export const NextBtn = styled.button`
   text-align: center;
   text-rendering: geometricprecision;
   text-transform: none;
+  transition: 0.4s;
   user-select: none;
   touch-action: manipulation;
   vertical-align: middle;
 
   &:hover,
   &:active {
-    background-color: initial;
-    background-position: 0 0;
-    color: #ff4742;
+    scale: 1.05;
+    box-shadow: rgba(0, 0, 0, 0.3) 1px 2px 4px;
   }
 
   &:active {
     opacity: 0.5;
+    scale: 0.95;
   }
 `;

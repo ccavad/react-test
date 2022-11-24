@@ -66,10 +66,10 @@ function Header() {
         <i className="fa-solid fa-person-military-rifle"></i>
         <Amount>{army}</Amount>
       </HeaderResource>
-      <HeaderResource>
+      {/* <HeaderResource>
         <i className="fa-solid fa-shield"></i>
         <Amount>{defence}</Amount>
-      </HeaderResource>
+      </HeaderResource> */}
       <Amount>Tur: {turn}</Amount>
     </HeaderStyled>
   );

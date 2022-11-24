@@ -12,6 +12,14 @@ function Map({ regions, regionId, setRegionId, setMousePos }) {
       viewBox="0 0 800 600"
       style={{ enableBackground: "new 0 0 800 600" }}
       xmlSpace="preserve"
+      onMouseLeave={() =>
+        setMousePos({
+          x: 0,
+          y: 0,
+          name: "",
+          zone: "",
+        })
+      }
     >
       <g id="Azerbaijan">
         {regions.map((reg, ind) => (
@@ -27,15 +35,9 @@ function Map({ regions, regionId, setRegionId, setMousePos }) {
                 x: e.pageX + 15,
                 y: e.pageY + 15,
                 name: reg.ad,
+                zone: reg.zone,
               });
             }}
-            onMouseLeave={() =>
-              setMousePos({
-                x: 0,
-                y: 0,
-                name: "",
-              })
-            }
           />
         ))}
       </g>

@@ -1,0 +1,23 @@
+turn based
+
+turu bitir (next turn) basdiqda 0.5 saniyelik loading ekrani kecsin
+her tur ehali +1 artsin
+
+resurslar:
+  yemek - kend teserrufatindan gelir
+  xalq - cox olduqca vergiden gelen pul da coxalir, yemek de azalir
+  pul - yemek / neft satmaqla / vergi / turizm
+  xosbextlik - vergiden, xalq ucun edilenlerden asilidi, az olsa 
+  ordu - pulla alinir
+  medeniyyet - 
+
+regionlarda ne qura bilersen:
+  kend teserrufati - (qoyunculuq, qusculuq, qaramal, baliqciliq, cayciliq, taxilciliq, meyve istehsali, )
+  neft sektoru - (upgrade ele)
+  turizm zonasi - ()
+  herbi baza - telim kec
+  ticaret zonasi - neft sat, yemek sat, 
+  sosial xidmetler - 
+  medeniyyet - (musiqi mektebi, )
+
+headerde yazilacaqlar - yemek, neft, pul, xalq, xosbextlik, medeniyyet, ordu, tur

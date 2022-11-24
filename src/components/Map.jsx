@@ -1,6 +1,7 @@
 import React from "react";
+import { nanoid } from "nanoid";
 
-function Map({ regions, setRegion, setMousePos }) {
+function Map({ regions, regionId, setRegionId, setMousePos }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,31 +14,29 @@ function Map({ regions, setRegion, setMousePos }) {
       xmlSpace="preserve"
     >
       <g id="Azerbaijan">
-        {regions.map((reg) => (
-          <>
-            <path
-              key={reg.ad}
-              d={reg.path}
-              onClick={(e) => {
-                setRegion(reg.ad);
-                // e.target.classList.toggle("lost");
-              }}
-              onMouseMove={(e) =>
-                setMousePos({
-                  x: e.pageX + 15,
-                  y: e.pageY + 15,
-                  name: reg.ad,
-                })
-              }
-              onMouseLeave={() =>
-                setMousePos({
-                  x: 0,
-                  y: 0,
-                  name: "",
-                })
-              }
-            />
-          </>
+        {regions.map((reg, ind) => (
+          <path
+            key={nanoid()}
+            d={reg.path}
+            style={{ fill: regionId == ind ? "#9e2a2c" : "#429b4a" }}
+            onClick={() => {
+              setRegionId(ind);
+            }}
+            onMouseMove={(e) => {
+              setMousePos({
+                x: e.pageX + 15,
+                y: e.pageY + 15,
+                name: reg.ad,
+              });
+            }}
+            onMouseLeave={() =>
+              setMousePos({
+                x: 0,
+                y: 0,
+                name: "",
+              })
+            }
+          />
         ))}
       </g>
     </svg>

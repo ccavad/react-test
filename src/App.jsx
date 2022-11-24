@@ -1,62 +1,83 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import Baku from "./components/Baku";
 import Map from "./components/Map";
-import Regions from "./components/Regions";
-import SekiZaqatala from "./components/SekiZaqatala";
+import Tooltip from "./components/Tooltip";
+import Modal from "./components/Modal";
+import Header from "./components/Header";
+import { useSelector, useDispatch } from "react-redux";
+import { setZone } from "./features/regionsSlice";
+import {
+  increment,
+  oneUp,
+  makeHappy,
+  nextTurnDp,
+  startValues,
+} from "./features/resourcesSlice";
+import RegionPanel from "./components/RegionPanel";
+import { NextBtn } from "./components/ButtonComponents";
 
 function App() {
-  const [money, setMoney] = useState(500);
-  const [region, setRegion] = useState("");
-  const [oil, setOil] = useState(14);
-  const [oilProgress, setOilProgress] = useState(0);
-  const [oilSpeed, setOilSpeed] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [regionId, setRegionId] = useState(8);
   const [mousePos, setMousePos] = useState({
     x: "",
     y: "",
     name: "",
   });
 
+  const Regions = useSelector((state) => state.regions.value);
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   if (happiness > 100) {
+  //     setHappiness(100);
+  //   }
+  //   if (happiness < 0) {
+  //     setHappiness(0);
+  //   }
+  // }, [happiness]);
+
+  useEffect(() => {
+    console.log("Start");
+    dispatch(startValues());
+  }, []);
+
+  function nextTurn() {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      dispatch(nextTurnDp());
+    }, 500);
+  }
+
+  function zoneHandler(zone) {
+    dispatch(setZone(zone));
+  }
+
   return (
     <div className="App">
-      <header>
-        <div className="header-resource">
-          <i class="fa-solid fa-oil-well"></i>
-          <span>{oil}</span>
-        </div>
-        <div className="header-resource">
-          <i class="fa-solid fa-money-bill"></i>
-          <span>{money}</span>
-        </div>
-      </header>
-      <Map regions={Regions} setRegion={setRegion} setMousePos={setMousePos} />
+      {loading && <Modal />}
+      <Header />
+      <Map
+        regions={Regions}
+        regionId={regionId}
+        setRegionId={setRegionId}
+        setMousePos={setMousePos}
+      />
+      <Tooltip mousePos={mousePos} />
+      <RegionPanel id={regionId} />
       <div
-        className="tooltip"
+        className="nextbtncont"
         style={{
-          left: mousePos.x + "px",
-          top: mousePos.y + "px",
-          display: !mousePos.name && "none",
+          gridColumn: "span 2",
+          display: "Flex",
+          justifyContent: "flex-end",
+          paddingRight: "2rem",
         }}
       >
-        {mousePos.name} <br />
-        {/* {mousePos.x} <br />
-        {mousePos.y} */}
-      </div>
-      <div>
-        <h1>{region}</h1>
-        {region === "Bakı" && (
-          <Baku
-            oil={oil}
-            setOil={setOil}
-            oilProgress={oilProgress}
-            setOilProgress={setOilProgress}
-            oilSpeed={oilSpeed}
-            setOilSpeed={setOilSpeed}
-            money={money}
-            setMoney={setMoney}
-          />
-        )}
-        {region === "Şəki-Zaqatala" && <SekiZaqatala />}
+        <NextBtn className="nextbtn" onClick={nextTurn}>
+          Növbəti Tur
+        </NextBtn>
       </div>
     </div>
   );

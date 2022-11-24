@@ -1,51 +1,16 @@
-pul qazanmaq, xalqi idare etmek,
-dusmene qarsi ordu yigmaq, diger olkelerle munasibet,
-resurs donusdurme
+oyuna 1ci turda baslayirsan
+yuxarida resurslarin ve necenci turda oldugunu gosteren header yerlesir
+sol terefde xerite var,
+ xerite uzerinde hansisa regionu secerek sag terefde hemin regionun idare panelini acirsan
+sag terefde acilacaq idare panelinde ilk defe qarsiva zona secimi cixir.
+zonani secdikden sonra (neft, turizm, herbi) ise hemin regiona mexsus zona idare etme paneli cixir
+alt terefde ise novbeti turu secme duymesi yerlesir
+xeritede regionlarin uzerinde mausu gezdirdikde ora haqqinda qisa melumat veren tooltip acilir
+headerdeki resurslarda da hemcinin tooltip gorunecek
 
-random number generator
-high risk vs high reward
-random start / events
-secim ekranlari
-
-esgerlerin attack gucu iki eded araliginda olsun. 
-doyusende ikisi arasi random versin
-10-15dise meselen 
-
-baki - neft (qutaracaq), diplomatiya
-qarabag - infrastruktur
-zengezur - muharibe
-naxcivan - kesfiyyat
-qazax tovuz - ordu
-seki zaqatala - turizm
-quba xacmaz - , kend t,
-aran - elektrik enerji, 
-sirvan - kend teserrufati, taxilciliq, 
-lenkeran - kend teserrufati
-
-diplomatiya: 
-qerb, rusiya-cin, iran pastafarianizm respublikasi, turkiye
-
-pul - neft satisi, turizm, 
-elm - 
-
-
-doyus sistemi
-tycoon - build earn upgrade
-exploration, discovery - kesfiyyat
-
-***game loop***
-
-
-*** baki neft ***
-neft cixar duymesine basdiqda progress islesin ve tamamlananda neft 1 barel artsin
-ortalama bir barel neft 100 dollar
-
-***general design***
-gradient istifade et
-
-***ideologiyalar***
-turk/iran tesiri - kalx, ordu gucu +10%, essek telebati
-qerb tesiri - dogum -20%, 
-avrasiya - isci gucu +15%, 
-
-***xalq ehali***
+app - 
+  header
+  main -
+    xerite
+    idare paneli
+  

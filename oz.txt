@@ -1,0 +1,47 @@
+sehne 1: 
+  turmede hucrede 2 nefer - zamin ve [dostu] var.
+  zamin elindeki sekile baxir. (ekrana yazi gelir ki sekile baxmaq ucun filan duymeni bas)
+  sekilde zamin, xd, orik, aska var (duymeni yeniden basdiqda sekilden cixib turmeye qayidir)
+  zamin: "ortaliq usaqlari...men dostlugu, oglanligi,
+  qrammatik cehetden sehv ruscani ortaliqdan oyrenmisdim. ele xeyaneti de ortaliqda oyretdiler!"
+  [dostu]: "darixma zamin. gozlediyimiz gun bugundur. qaciriq"
+  zamin: "nece qaciriq? hec demedin"
+  [dostu]: "bilirsenki hebsxananin yaninda gloryhole aciblar. qardaw usaq var birazdan divarda desik acib bizi qaciracaq"
+  zamin: "men de birvaxtlar qardaw sozu hecaya bolunmur deyirdim. amma qardaw dediyim uc nefer elediyimiz soygunda meni ciriga qoyub qacdilar."
+  [dostu]: "bilirem gijdillaq 10 ildi basqa hecne danismirsan onsuz. darixma intiqamivi alaciyiq"
+  zamin: "sankt peterburgda sperm bank soymusduq. ogurladigimiz qenimetleri qara bazarda satib boyuk 'biznesmen' olublar. 
+    meni ise polise rusvetle teslim edib gunah kecisi elediler. onlara batmaq cetin olacaq"
+  bu mament divarda balaca desik acilir
+  [dostu]: "aha deyesen bu dostumdu"
+  desikden dudus cixir
+  [dostu]: "yox o deyilmis"
+  dudus desikden geri qayidir. 3-4 saniye sonra divarda yeni desik acilir. sonra divar temiz parcalanir.
+  [dostu]: "davay qacaq telesirem. axsama astarada usaq toyunda olmaliyam"
+  ekran qaralir
+
+sehne 2:
+  zaminle dostu level 1 olan kucededi
+  [dostu]: "xd-gilin destesine girib guvenlerin qazanmaq ucun uz emeliyati olmalisan"
+  zamin: "emeliyat ne qederdi"
+  [dostu]: "hec ucuz deyil. burda narkotik satan deste var. girib pullarin ogurlamalisan"
+  zamin: "yaxsi"
+
+level 1 baslayar. zamin ancaq bicagla geder. levelde nail kerimli xarakteri de var.
+  yanina yaxinlasanda deyir ki "men sadece cekilis ucun burdayam mene deyme"
+levelin sonunda qara camadan var onu goturende level bitir
+
+sehne 3:
+  emeliyatxana yazilan qapi, xestexana. zaminin dostu dayanib. birden zamin qapidan uzu sargili sekidle cixir
+  [dostu]: "sargini ac gorum nece olmusan"
+  zamin sargini acir. tek deyisiklik taliban saqqali var.
+  [dostu]: "zamin? bu sensen?"
+  zamin: "zamin? yox men cerraham."
+  xarakter bunu deyib gedir. qapidan yeniden uzu sargili zamin cixir
+  [dostu]: "zamin?"
+  esl zamin: "he noldu?"
+  [dostu]: "hecne. sargini ac gorek"
+  zamin sargini acar. tek deyisiklik uzun fransizki bigi var
+  [dostu]: "taninmaz haldasan. indi plana qayidaq. xd-gilin qan dusmeni sabah adamlariyla diskotekada olacaq.
+  onu oldursek xd-nin qulagina catariq"
+
+

@@ -12,7 +12,7 @@ const initialState = {
       perTurn: 0,
     },
     money: {
-      amount: 100,
+      amount: 10000,
       perTurn: 10,
     },
     people: 5,

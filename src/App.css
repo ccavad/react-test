@@ -43,6 +43,7 @@ path.lost {
   color: white;
   padding: 0 1rem;
   border-radius: 6px;
+  margin-top: 3px;
 }
 
 .btn-price::before {

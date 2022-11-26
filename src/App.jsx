@@ -4,8 +4,8 @@ import Map from "./components/Map";
 import Tooltip from "./components/Tooltip";
 import Modal from "./components/Modal";
 import Header from "./components/Header";
+import Agriculture from "./components/zones/Agriculture";
 import { useSelector, useDispatch } from "react-redux";
-import { setZone } from "./features/regionsSlice";
 import {
   increment,
   oneUp,
@@ -28,6 +28,7 @@ function App() {
 
   const Regions = useSelector((state) => state.regions.value);
   const dispatch = useDispatch();
+  const agriculture = useSelector((state) => state.zones.value.agriculture);
 
   // useEffect(() => {
   //   if (happiness > 100) {
@@ -40,6 +41,7 @@ function App() {
 
   useEffect(() => {
     console.log("Start");
+    console.log(agriculture);
     dispatch(startValues());
   }, []);
 
@@ -49,10 +51,6 @@ function App() {
       setLoading(false);
       dispatch(nextTurnDp());
     }, 500);
-  }
-
-  function zoneHandler(zone) {
-    dispatch(setZone(zone));
   }
 
   return (
@@ -66,7 +64,8 @@ function App() {
         setMousePos={setMousePos}
       />
       <Tooltip mousePos={mousePos} />
-      <RegionPanel id={regionId} />
+      <Agriculture />
+      {/* <RegionPanel id={regionId} /> */}
       <div
         className="nextbtncont"
         style={{

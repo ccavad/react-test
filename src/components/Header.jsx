@@ -96,6 +96,8 @@ const Amount = styled.span`
   display: flex;
   align-items: center;
   gap: 0.2rem;
+  justify-content: flex-end;
+  flex: 1;
 `;
 
 const PerTurn = styled.span`

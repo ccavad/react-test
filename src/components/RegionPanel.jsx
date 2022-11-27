@@ -28,6 +28,15 @@ function RegionPanel({ id }) {
       {currentReg.zone === "sosial zona" && (
         <Social regionState={currentReg.zoneState} regId={id} />
       )}
+      {currentReg.zone === "neft sektoru" && (
+        <OilZone regionState={currentReg.zoneState} regId={id} />
+      )}
+      {currentReg.zone === "mədəniyyət zonası" && (
+        <Culture regionState={currentReg.zoneState} regId={id} />
+      )}
+      {currentReg.zone === "ticarət zonası" && (
+        <Trade regionState={currentReg.zoneState} regId={id} />
+      )}
     </div>
   );
 }
@@ -50,18 +59,36 @@ function ZoneSelect({ id }) {
           break;
         case "oil":
           dispatch(setZoneName({ regId: id, name: "neft sektoru" }));
+          dispatch(
+            setZoneState({
+              regId: id,
+              zoneState: { ...zones.oilZone },
+            })
+          );
           break;
         case "mil":
           dispatch(setZoneName({ regId: id, name: "hərbi zona" }));
           break;
         case "cul":
           dispatch(setZoneName({ regId: id, name: "mədəniyyət zonası" }));
+          dispatch(
+            setZoneState({
+              regId: id,
+              zoneState: [...zones.culture],
+            })
+          );
           break;
         case "tou":
           dispatch(setZoneName({ regId: id, name: "turizm sektoru" }));
           break;
         case "tra":
           dispatch(setZoneName({ regId: id, name: "ticarət zonası" }));
+          dispatch(
+            setZoneState({
+              regId: id,
+              zoneState: { ...zones.trade },
+            })
+          );
           break;
         case "soc":
           dispatch(setZoneName({ regId: id, name: "sosial zona" }));

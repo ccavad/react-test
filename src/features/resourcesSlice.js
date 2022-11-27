@@ -5,7 +5,7 @@ const initialState = {
     turn: 1,
     food: {
       amount: 10,
-      perTurn: 2,
+      perTurn: 5,
     },
     oil: {
       amount: 0,
@@ -16,13 +16,12 @@ const initialState = {
       perTurn: 10,
     },
     people: 5,
-    happiness: 80,
+    happiness: 70,
     culture: {
       amount: 0,
       perTurn: 0,
     },
     army: 5,
-    // defence: 10,
   },
 };
 
@@ -31,16 +30,25 @@ export const resourcesSlice = createSlice({
   initialState,
   reducers: {
     increment: (state, action) => {
-      let name = action.payload.name;
       if (state.value.money.amount >= action.payload.price) {
+        let name = action.payload.name;
         state.value[name].perTurn += action.payload.adding;
         state.value.money.amount -= action.payload.price;
       }
     },
-    // people, army, defence kimi tek tek artacaq resurslara aiddir
+    // people, army kimi tek tek artacaq resurslara aiddir
     oneUp: (state, action) => {
       let name = action.payload.name;
       state.value[name]++;
+    },
+    oilReducer: (state, action) => {
+      state.value.oil.perTurn += action.payload.perTurn;
+      state.value.money.amount -= action.payload.price;
+    },
+    selling: (state, action) => {
+      let product = action.payload.name;
+      state.value[product].amount -= product === "food" ? 10 : 1;
+      state.value.money.amount += action.payload.money;
     },
     makeHappy: (state, action) => {
       state.value.happiness += action.payload;
@@ -86,7 +94,15 @@ export const resourcesSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, oneUp, makeHappy, nextTurnDp, spend, startValues } =
-  resourcesSlice.actions;
+export const {
+  increment,
+  oneUp,
+  makeHappy,
+  nextTurnDp,
+  spend,
+  startValues,
+  oilReducer,
+  selling,
+} = resourcesSlice.actions;
 
 export default resourcesSlice.reducer;

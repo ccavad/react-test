@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { spend, makeHappy } from "../../features/resourcesSlice";
 import { BtnGeneral } from "../ButtonComponents";
@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { nanoid } from "nanoid";
 import { setZoneState } from "../../features/regionsSlice";
 import produce from "immer";
+
 const Btn = styled(BtnGeneral)`
   background-color: #6415cc;
   color: white;
@@ -48,9 +49,9 @@ function Social({ regionState, regId, adding }) {
           <Btn
             key={nanoid()}
             onClick={() => clickHandler(index, category.price, category.adding)}
-            style={{ display: category.completed && "none" }}
+            disabled={category.completed}
           >
-            {category.name}
+            {category.name} (+{category.adding})
             <div className="btn-price">{category.price}</div>
           </Btn>
         ))}

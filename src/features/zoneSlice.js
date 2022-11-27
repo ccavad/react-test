@@ -90,6 +90,42 @@ const initialState = {
         adding: 4,
       },
     ],
+    culture: [
+      {
+        name: "teatr",
+        completed: false,
+        price: 40,
+        adding: 1,
+      },
+      {
+        name: "konservatoriya",
+        completed: false,
+        price: 45,
+        adding: 1,
+      },
+      {
+        name: "yazıçılar birliyi",
+        completed: false,
+        price: 30,
+        adding: 1,
+      },
+    ],
+    oilZone: {
+      well: {
+        price: 50,
+        adding: 1,
+        count: 0,
+      },
+      company: {
+        price: 1000,
+        adding: 10,
+        count: 0,
+      },
+    },
+    trade: {
+      food: 5,
+      oil: 50,
+    },
   },
 };
 

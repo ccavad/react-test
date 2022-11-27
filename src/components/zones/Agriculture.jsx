@@ -1,6 +1,6 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { spend, increment } from "../../features/resourcesSlice";
+import { increment } from "../../features/resourcesSlice";
 import { BtnGeneral } from "../ButtonComponents";
 import styled from "styled-components";
 import { nanoid } from "nanoid";
@@ -29,7 +29,6 @@ function Agriculture({ regionState, regId }) {
       const nextState = produce(regionState, (draftState) => {
         draftState[ind].completed = true;
       });
-      dispatch(spend(price));
       dispatch(increment({ name: "food", price: price, adding: adding }));
       dispatch(setZoneState({ regId: regId, zoneState: nextState }));
     }
@@ -49,9 +48,9 @@ function Agriculture({ regionState, regId }) {
           <Btn
             key={nanoid()}
             onClick={() => clickHandler(index, category.price, category.adding)}
-            style={{ display: category.completed && "none" }}
+            disabled={category.completed}
           >
-            {category.name}
+            {category.name} (+{category.adding})
             <div className="btn-price">{category.price}</div>
           </Btn>
         ))}

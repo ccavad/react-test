@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { spend } from "../features/resourcesSlice";
-import { zoneReducer } from "../features/regionsSlice";
+import { setZoneName, setZoneState } from "../features/regionsSlice";
 import Agriculture from "./zones/Agriculture";
 import Culture from "./zones/Culture";
 import Military from "./zones/Military";
@@ -14,15 +14,20 @@ import { nanoid } from "nanoid";
 
 function RegionPanel({ id }) {
   const regions = useSelector((state) => state.regions.value);
+  let currentReg = regions[id];
 
   return (
     <div>
-      {regions.map((reg, ind) => (
-        <div style={{ display: ind !== id && "none" }} key={nanoid()}>
-          <h1>{reg.ad}</h1>
-          <ZoneSelect id={id} />
-        </div>
-      ))}
+      <h1 onClick={() => console.table(currentReg.zoneState)}>
+        {currentReg.ad}
+      </h1>
+      {!currentReg.zone && <ZoneSelect id={id} />}
+      {currentReg.zone === "kənd təsərrüfatı" && (
+        <Agriculture regionState={currentReg.zoneState} regId={id} />
+      )}
+      {currentReg.zone === "sosial zona" && (
+        <Social regionState={currentReg.zoneState} regId={id} />
+      )}
     </div>
   );
 }
@@ -30,50 +35,50 @@ function RegionPanel({ id }) {
 function ZoneSelect({ id }) {
   const dispatch = useDispatch();
   const money = useSelector((state) => state.resources.value.money);
-  const [zone, setZone] = useState("");
-  const zoneSelectRef = useRef(null);
+  const zones = useSelector((state) => state.zones.value);
+  const regions = useSelector((state) => state.regions.value);
 
   function zoneHandler(name, zonePrice) {
     if (money.amount >= zonePrice) {
       dispatch(spend(zonePrice));
       switch (name) {
         case "agr":
-          setZone(<Agriculture />);
-          dispatch(zoneReducer({ regId: id, name: "kənd təsərrüfatı" }));
+          dispatch(setZoneName({ regId: id, name: "kənd təsərrüfatı" }));
+          dispatch(
+            setZoneState({ regId: id, zoneState: [...zones.agriculture] })
+          );
           break;
         case "oil":
-          setZone(<OilZone />);
-          dispatch(zoneReducer({ regId: id, name: "neft sektoru" }));
+          dispatch(setZoneName({ regId: id, name: "neft sektoru" }));
           break;
         case "mil":
-          setZone(<Military />);
-          dispatch(zoneReducer({ regId: id, name: "hərbi zona" }));
+          dispatch(setZoneName({ regId: id, name: "hərbi zona" }));
           break;
         case "cul":
-          setZone(<Culture />);
-          dispatch(zoneReducer({ regId: id, name: "mədəniyyət zonası" }));
+          dispatch(setZoneName({ regId: id, name: "mədəniyyət zonası" }));
           break;
         case "tou":
-          setZone(<Tourism />);
-          dispatch(zoneReducer({ regId: id, name: "turizm sektoru" }));
+          dispatch(setZoneName({ regId: id, name: "turizm sektoru" }));
           break;
         case "tra":
-          setZone(<Trade />);
-          dispatch(zoneReducer({ regId: id, name: "ticarət zonası" }));
+          dispatch(setZoneName({ regId: id, name: "ticarət zonası" }));
           break;
         case "soc":
-          setZone(<Social />);
-          dispatch(zoneReducer({ regId: id, name: "sosial zona" }));
+          dispatch(setZoneName({ regId: id, name: "sosial zona" }));
+          dispatch(
+            setZoneState({
+              regId: id,
+              zoneState: [...zones.social],
+            })
+          );
           break;
       }
-      zoneSelectRef.current.style.display = "none";
-      console.log(zoneSelectRef.current);
     }
   }
 
   return (
     <>
-      <div ref={zoneSelectRef}>
+      <div>
         <h2>Bu regionda nə sektoru quracaqsan?</h2>
         <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
           <BtnGeneral onClick={() => zoneHandler("agr", 30)}>
@@ -106,7 +111,6 @@ function ZoneSelect({ id }) {
           </BtnGeneral>
         </div>
       </div>
-      {zone}
     </>
   );
 }

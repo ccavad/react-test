@@ -64,8 +64,8 @@ function App() {
         setMousePos={setMousePos}
       />
       <Tooltip mousePos={mousePos} />
-      <Agriculture />
-      {/* <RegionPanel id={regionId} /> */}
+      {/* <Agriculture /> */}
+      <RegionPanel id={regionId} />
       <div
         className="nextbtncont"
         style={{

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { increment } from "../../features/resourcesSlice";
-import { setAgriculture } from "../../features/zoneSlice";
+import { spend, increment } from "../../features/resourcesSlice";
 import { BtnGeneral } from "../ButtonComponents";
 import styled from "styled-components";
 import { nanoid } from "nanoid";
+import { setZoneState } from "../../features/regionsSlice";
+import produce from "immer";
 
 const Btn = styled(BtnGeneral)`
   background-color: #15cc3d;
@@ -19,20 +20,20 @@ const Btn = styled(BtnGeneral)`
   }
 `;
 
-function Agriculture() {
+function Agriculture({ regionState, regId }) {
   const dispatch = useDispatch();
   const money = useSelector((state) => state.resources.value.money);
-  const agriculture = useSelector((state) => state.zones.value.agriculture);
-  const [state, setState] = useState(agriculture);
 
-  // function clickHandler(price, adding, ind) {
-  //   if (money.amount >= price) {
-  //     dispatch(increment({ name: "food", price: price, adding: adding }));
-  //     let newArr = btns.filter((btn) => btn !== btns[ind]);
-  //     setBtns(newArr);
-  //     console.log(agriculture);
-  //   }
-  // }
+  const clickHandler = (ind, price, adding) => {
+    if (money.amount >= price) {
+      const nextState = produce(regionState, (draftState) => {
+        draftState[ind].completed = true;
+      });
+      dispatch(spend(price));
+      dispatch(increment({ name: "food", price: price, adding: adding }));
+      dispatch(setZoneState({ regId: regId, zoneState: nextState }));
+    }
+  };
 
   return (
     <div>
@@ -44,20 +45,16 @@ function Agriculture() {
           gap: "0.5rem",
         }}
       >
-        {state
-          .filter((cat) => !cat.completed)
-          .map((category, index) => (
-            <Btn
-              key={nanoid()}
-              onClick={() => {
-                dispatch(setAgriculture(index));
-                console.log(category);
-              }}
-            >
-              {category.name}
-              <div className="btn-price">{category.price}</div>
-            </Btn>
-          ))}
+        {regionState.map((category, index) => (
+          <Btn
+            key={nanoid()}
+            onClick={() => clickHandler(index, category.price, category.adding)}
+            style={{ display: category.completed && "none" }}
+          >
+            {category.name}
+            <div className="btn-price">{category.price}</div>
+          </Btn>
+        ))}
       </div>
     </div>
   );

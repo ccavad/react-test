@@ -46,6 +46,50 @@ const initialState = {
         adding: 1,
       },
     ],
+    social: [
+      {
+        name: "məktəb",
+        completed: false,
+        price: 35,
+        adding: 1,
+      },
+      {
+        name: "məscid",
+        completed: false,
+        price: 30,
+        adding: 1,
+      },
+      {
+        name: "xəstəxana",
+        completed: false,
+        price: 50,
+        adding: 2,
+      },
+      {
+        name: "polis bölməsi",
+        completed: false,
+        price: 40,
+        adding: 2,
+      },
+      {
+        name: "mall",
+        completed: false,
+        price: 50,
+        adding: 3,
+      },
+      {
+        name: "park",
+        completed: false,
+        price: 25,
+        adding: 3,
+      },
+      {
+        name: "bayram tədbiri",
+        completed: false,
+        price: 60,
+        adding: 4,
+      },
+    ],
   },
 };
 
@@ -54,7 +98,7 @@ export const zoneSlice = createSlice({
   initialState,
   reducers: {
     setAgriculture: (state, action) => {
-      state.value.agriculture[action.payload].completed = true;
+      console.log(state.value);
     },
   },
 });

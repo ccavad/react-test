@@ -35,7 +35,7 @@ function Trade({ regionState, regId }) {
     if (oil.amount >= 1) {
       dispatch(selling({ name: "oil", money: regionState.oil }));
       const nextState = produce(regionState, (draftState) => {
-        draftState.oil = Math.floor(draftState.oil * 0.95);
+        draftState.oil = Math.max(1, Math.floor(draftState.oil * 0.95));
       });
       dispatch(setZoneState({ regId: regId, zoneState: nextState }));
     }

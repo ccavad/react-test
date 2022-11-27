@@ -124,7 +124,14 @@ const initialState = {
     },
     trade: {
       food: 5,
-      oil: 50,
+      oil: 25,
+    },
+    tourism: {
+      hotel: {
+        price: 50,
+        adding: 3,
+        count: 0,
+      },
     },
   },
 };

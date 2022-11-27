@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { spend } from "../features/resourcesSlice";
+import { spend, setZoneIncome } from "../features/resourcesSlice";
 import { setZoneName, setZoneState } from "../features/regionsSlice";
 import Agriculture from "./zones/Agriculture";
 import Culture from "./zones/Culture";
@@ -11,6 +11,7 @@ import Trade from "./zones/Trade";
 import Social from "./zones/Social";
 import { BtnGeneral } from "./ButtonComponents";
 import { nanoid } from "nanoid";
+// import BakuImage from "../assets/baku.jpg";
 
 function RegionPanel({ id }) {
   const regions = useSelector((state) => state.regions.value);
@@ -18,9 +19,7 @@ function RegionPanel({ id }) {
 
   return (
     <div>
-      <h1 onClick={() => console.table(currentReg.zoneState)}>
-        {currentReg.ad}
-      </h1>
+      <h1>{currentReg.ad}</h1>
       {!currentReg.zone && <ZoneSelect id={id} />}
       {currentReg.zone === "kənd təsərrüfatı" && (
         <Agriculture regionState={currentReg.zoneState} regId={id} />
@@ -37,6 +36,13 @@ function RegionPanel({ id }) {
       {currentReg.zone === "ticarət zonası" && (
         <Trade regionState={currentReg.zoneState} regId={id} />
       )}
+      {currentReg.zone === "turizm sektoru" && (
+        <Tourism regionState={currentReg.zoneState} regId={id} />
+      )}
+      {currentReg.zone === "hərbi zona" && (
+        <Military regionState={currentReg.zoneState} regId={id} />
+      )}
+      {/* <div className="bg-image">{BakuImage}</div> */}
     </div>
   );
 }
@@ -45,6 +51,7 @@ function ZoneSelect({ id }) {
   const dispatch = useDispatch();
   const money = useSelector((state) => state.resources.value.money);
   const zones = useSelector((state) => state.zones.value);
+  const army = useSelector((state) => state.resources.army);
   const regions = useSelector((state) => state.regions.value);
 
   function zoneHandler(name, zonePrice) {
@@ -68,6 +75,12 @@ function ZoneSelect({ id }) {
           break;
         case "mil":
           dispatch(setZoneName({ regId: id, name: "hərbi zona" }));
+          dispatch(
+            setZoneState({
+              regId: id,
+              zoneState: army,
+            })
+          );
           break;
         case "cul":
           dispatch(setZoneName({ regId: id, name: "mədəniyyət zonası" }));
@@ -80,6 +93,12 @@ function ZoneSelect({ id }) {
           break;
         case "tou":
           dispatch(setZoneName({ regId: id, name: "turizm sektoru" }));
+          dispatch(
+            setZoneState({
+              regId: id,
+              zoneState: { ...zones.tourism },
+            })
+          );
           break;
         case "tra":
           dispatch(setZoneName({ regId: id, name: "ticarət zonası" }));
@@ -89,6 +108,7 @@ function ZoneSelect({ id }) {
               zoneState: { ...zones.trade },
             })
           );
+          dispatch(setZoneIncome(5));
           break;
         case "soc":
           dispatch(setZoneName({ regId: id, name: "sosial zona" }));
@@ -112,9 +132,9 @@ function ZoneSelect({ id }) {
             Kənd təsərrüfatı
             <div className="btn-price">30</div>
           </BtnGeneral>
-          <BtnGeneral onClick={() => zoneHandler("oil", 100)}>
+          <BtnGeneral onClick={() => zoneHandler("oil", 200)}>
             Neft Sektoru
-            <div className="btn-price">100</div>
+            <div className="btn-price">200</div>
           </BtnGeneral>
           <BtnGeneral onClick={() => zoneHandler("mil", 60)}>
             Hərbi Zona

@@ -12,11 +12,14 @@ const initialState = {
       perTurn: 0,
     },
     money: {
-      amount: 10000,
-      perTurn: 10,
+      amount: 200,
+      perTurn: 5,
+      taxes: 10,
+      zoneIncome: 0,
+      tourism: 0,
     },
     people: 5,
-    happiness: 70,
+    happiness: 80,
     culture: {
       amount: 0,
       perTurn: 0,
@@ -36,10 +39,9 @@ export const resourcesSlice = createSlice({
         state.value.money.amount -= action.payload.price;
       }
     },
-    // people, army kimi tek tek artacaq resurslara aiddir
-    oneUp: (state, action) => {
-      let name = action.payload.name;
-      state.value[name]++;
+    armyReducer: (state) => {
+      state.value.army++;
+      state.value.money.amount -= 100; //bir esgerin qiymeti
     },
     oilReducer: (state, action) => {
       state.value.oil.perTurn += action.payload.perTurn;
@@ -50,6 +52,19 @@ export const resourcesSlice = createSlice({
       state.value[product].amount -= product === "food" ? 10 : 1;
       state.value.money.amount += action.payload.money;
     },
+    setZoneIncome: (state, action) => {
+      state.value.money.zoneIncome += action.payload;
+    },
+    tourismIncome: ({ value }, action) => {
+      value.money.tourism = action.payload.perTurn;
+      value.money.amount -= action.payload.price;
+      value.money.perTurn =
+        value.money.taxes +
+        value.money.zoneIncome -
+        value.army +
+        value.money.tourism +
+        Math.floor(value.culture.amount / 10);
+    },
     makeHappy: (state, action) => {
       state.value.happiness += action.payload;
     },
@@ -59,36 +74,38 @@ export const resourcesSlice = createSlice({
         state.value.money.amount -= price;
       }
     },
-    startValues: ({ value }) => {
-      value.happiness = 100 - value.people * 2;
-      value.money.perTurn = value.people * 2 - value.army;
-    },
     nextTurnDp: ({ value }) => {
       value.turn++;
       value.food.amount += value.food.perTurn;
       value.oil.amount += value.oil.perTurn;
       value.money.amount += value.money.perTurn;
       value.culture.amount += value.culture.perTurn;
-      let tax;
-      // xoxbextlikden asili olaraq ne qeder vergi gelecek
-      if (value.happiness > 65) {
-        tax = value.people * 2;
-      } else if (value.happiness < 35) {
-        tax = 0;
-      } else {
-        tax = value.people;
+      if (value.turn % 5 == 0) {
+        value.army--;
       }
-      value.money.perTurn = tax;
       if (value.food.amount > 0) {
         value.people++;
         value.food.perTurn--;
-        value.happiness -= 2;
-      } else {
-        value.happiness -= 4;
       }
       if (value.happiness < 0) {
         value.happiness = 0;
       }
+      value.happiness =
+        90 - value.people * 2 + Math.floor(value.culture.amount / 10);
+      // xoxbextlikden asili olaraq ne qeder vergi gelecek
+      if (value.happiness > 65) {
+        value.money.taxes = value.people * 2;
+      } else if (value.happiness < 35) {
+        value.money.taxes = 0;
+      } else {
+        value.money.taxes = value.people;
+      }
+      value.money.perTurn =
+        value.money.taxes +
+        value.money.zoneIncome -
+        value.army +
+        value.money.tourism +
+        Math.floor(value.culture.amount / 15);
     },
   },
 });
@@ -96,13 +113,14 @@ export const resourcesSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   increment,
-  oneUp,
+  armyReducer,
   makeHappy,
   nextTurnDp,
   spend,
-  startValues,
   oilReducer,
   selling,
+  setZoneIncome,
+  tourismIncome,
 } = resourcesSlice.actions;
 
 export default resourcesSlice.reducer;

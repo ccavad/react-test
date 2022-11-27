@@ -6,13 +6,7 @@ import Modal from "./components/Modal";
 import Header from "./components/Header";
 import Agriculture from "./components/zones/Agriculture";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  increment,
-  oneUp,
-  makeHappy,
-  nextTurnDp,
-  startValues,
-} from "./features/resourcesSlice";
+import { nextTurnDp } from "./features/resourcesSlice";
 import RegionPanel from "./components/RegionPanel";
 import { NextBtn } from "./components/ButtonComponents";
 
@@ -28,7 +22,7 @@ function App() {
 
   const Regions = useSelector((state) => state.regions.value);
   const dispatch = useDispatch();
-  const agriculture = useSelector((state) => state.zones.value.agriculture);
+  const money = useSelector((state) => state.resources.value.money);
 
   // useEffect(() => {
   //   if (happiness > 100) {
@@ -41,8 +35,7 @@ function App() {
 
   useEffect(() => {
     console.log("Start");
-    console.log(agriculture);
-    dispatch(startValues());
+    console.log(money);
   }, []);
 
   function nextTurn() {

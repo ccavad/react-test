@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { nextTurnDp } from "./features/resourcesSlice";
 import RegionPanel from "./components/RegionPanel";
 import { NextBtn } from "./components/ButtonComponents";
+import GameStateModal from "./components/GameStateModal";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -23,6 +24,7 @@ function App() {
   const Regions = useSelector((state) => state.regions.value);
   const dispatch = useDispatch();
   const money = useSelector((state) => state.resources.value.money);
+  const gameState = useSelector((state) => state.resources.value.gameState);
 
   // useEffect(() => {
   //   if (happiness > 100) {
@@ -48,6 +50,7 @@ function App() {
 
   return (
     <div className="App">
+      {gameState !== "playing" && <GameStateModal state={gameState} />}
       {loading && <Modal />}
       <Header />
       <Map

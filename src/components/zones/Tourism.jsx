@@ -61,9 +61,6 @@ function Tourism({ regionState, regId }) {
       <h2>Turizm Sektoru</h2>
       <InfoPanel>
         <h3>Otel sayı : {regionState.hotel.count}</h3>
-        <h3>
-          Turizmdən gəlir : {regionState.hotel.adding * regionState.hotel.count}
-        </h3>
       </InfoPanel>
       <BtnContainer>
         <Btn onClick={hotelHandler}>

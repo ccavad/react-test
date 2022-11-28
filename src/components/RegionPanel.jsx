@@ -132,9 +132,9 @@ function ZoneSelect({ id }) {
             Kənd təsərrüfatı
             <div className="btn-price">30</div>
           </BtnGeneral>
-          <BtnGeneral onClick={() => zoneHandler("oil", 200)}>
+          <BtnGeneral onClick={() => zoneHandler("oil", 90)}>
             Neft Sektoru
-            <div className="btn-price">200</div>
+            <div className="btn-price">90</div>
           </BtnGeneral>
           <BtnGeneral onClick={() => zoneHandler("mil", 60)}>
             Hərbi Zona

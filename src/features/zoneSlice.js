@@ -51,43 +51,43 @@ const initialState = {
         name: "məktəb",
         completed: false,
         price: 35,
-        adding: 1,
+        adding: 2,
       },
       {
         name: "məscid",
         completed: false,
         price: 30,
-        adding: 1,
+        adding: 2,
       },
       {
         name: "xəstəxana",
         completed: false,
         price: 50,
-        adding: 2,
+        adding: 3,
       },
       {
         name: "polis bölməsi",
         completed: false,
         price: 40,
-        adding: 2,
+        adding: 4,
       },
       {
         name: "mall",
         completed: false,
         price: 50,
-        adding: 3,
+        adding: 4,
       },
       {
         name: "park",
         completed: false,
         price: 25,
-        adding: 3,
+        adding: 4,
       },
       {
         name: "bayram tədbiri",
         completed: false,
         price: 60,
-        adding: 4,
+        adding: 5,
       },
     ],
     culture: [
@@ -117,14 +117,14 @@ const initialState = {
         count: 0,
       },
       company: {
-        price: 1000,
-        adding: 10,
+        price: 250,
+        adding: 6,
         count: 0,
       },
     },
     trade: {
       food: 5,
-      oil: 25,
+      oil: 30,
     },
     tourism: {
       hotel: {

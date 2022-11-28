@@ -12,19 +12,20 @@ const initialState = {
       perTurn: 0,
     },
     money: {
-      amount: 200,
+      amount: 225,
       perTurn: 5,
       taxes: 10,
       zoneIncome: 0,
       tourism: 0,
     },
     people: 5,
-    happiness: 80,
+    happiness: 90,
     culture: {
       amount: 0,
       perTurn: 0,
     },
     army: 5,
+    gameState: "playing",
   },
 };
 
@@ -62,8 +63,7 @@ export const resourcesSlice = createSlice({
         value.money.taxes +
         value.money.zoneIncome -
         value.army +
-        value.money.tourism +
-        Math.floor(value.culture.amount / 10);
+        value.money.tourism * Math.ceil(value.culture.amount / 20);
     },
     makeHappy: (state, action) => {
       state.value.happiness += action.payload;
@@ -82,16 +82,22 @@ export const resourcesSlice = createSlice({
       value.culture.amount += value.culture.perTurn;
       if (value.turn % 5 == 0) {
         value.army--;
+        if (value.army <= 0) {
+          value.gameState = "occupation";
+        }
       }
       if (value.food.amount > 0) {
         value.people++;
         value.food.perTurn--;
-      }
-      if (value.happiness < 0) {
-        value.happiness = 0;
+      } else {
+        value.gameState = "hunger";
       }
       value.happiness =
-        90 - value.people * 2 + Math.floor(value.culture.amount / 10);
+        100 - value.people * 2 + Math.floor(value.culture.amount / 3);
+      if (value.happiness < 0) {
+        value.happiness = 0;
+        value.gameState = "unhappy";
+      }
       // xoxbextlikden asili olaraq ne qeder vergi gelecek
       if (value.happiness > 65) {
         value.money.taxes = value.people * 2;
@@ -104,8 +110,7 @@ export const resourcesSlice = createSlice({
         value.money.taxes +
         value.money.zoneIncome -
         value.army +
-        value.money.tourism +
-        Math.floor(value.culture.amount / 15);
+        value.money.tourism * Math.ceil(value.culture.amount / 20);
     },
   },
 });

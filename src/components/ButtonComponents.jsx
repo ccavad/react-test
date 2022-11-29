@@ -27,6 +27,11 @@ export const BtnGeneral = styled.button`
   vertical-align: baseline;
   width: auto;
 
+  &:disabled {
+    cursor: not-allowed;
+    background-color: lightgray;
+  }
+
   &:hover,
   &:focus {
     border-color: rgba(0, 0, 0, 0.15);

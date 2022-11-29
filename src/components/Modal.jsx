@@ -4,7 +4,7 @@ import styled from "styled-components";
 export default function Modal() {
   return (
     <ModalStyled>
-      <h2>Loading</h2>
+      <h2>Yüklənir...</h2>
       <Progress></Progress>
     </ModalStyled>
   );
@@ -24,6 +24,11 @@ const ModalStyled = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 2rem;
+
+  h2 {
+    font-size: 2rem;
+    letter-spacing: 3px;
+  }
 `;
 
 const Progress = styled.div`

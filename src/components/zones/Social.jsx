@@ -1,8 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { makeHappy } from "../../features/resourcesSlice";
+import { spend, makeHappy } from "../../features/resourcesSlice";
 import { BtnGeneral } from "../ButtonComponents";
 import styled from "styled-components";
+import { nanoid } from "nanoid";
+import { setZoneState } from "../../features/regionsSlice";
+import produce from "immer";
 
 const Btn = styled(BtnGeneral)`
   background-color: #6415cc;
@@ -17,32 +20,41 @@ const Btn = styled(BtnGeneral)`
   }
 `;
 
-function Social() {
+function Social({ regionState, regId, adding }) {
   const dispatch = useDispatch();
   const money = useSelector((state) => state.resources.value.money);
 
-  function clickHandler(price, happy, event) {
-    if (money.amount <= price) {
-      dispatch(makeHappy(happy));
-      event.target.closest("button").remove();
+  const clickHandler = (ind, price, adding) => {
+    if (money.amount >= price) {
+      const nextState = produce(regionState, (draftState) => {
+        draftState[ind].completed = true;
+      });
+      dispatch(spend(price));
+      dispatch(makeHappy(adding));
+      dispatch(setZoneState({ regId: regId, zoneState: nextState }));
     }
-  }
+  };
+
   return (
     <div>
       <h2>Sosial Zona</h2>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-        <Btn onClick={(e) => clickHandler(35, 2, e)}>
-          məktəb (+2)
-          <div className="btn-price">35</div>
-        </Btn>
-        <Btn onClick={(e) => clickHandler(30, 1, e)}>
-          məscid (+1)
-          <div className="btn-price">30</div>
-        </Btn>
-        <Btn onClick={(e) => clickHandler(50, 3, e)}>
-          xəstəxana (+2)
-          <div className="btn-price">50</div>
-        </Btn>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "0.5rem",
+        }}
+      >
+        {regionState.map((category, index) => (
+          <Btn
+            key={nanoid()}
+            onClick={() => clickHandler(index, category.price, category.adding)}
+            disabled={category.completed}
+          >
+            {category.name} (+{category.adding})
+            <div className="btn-price">{category.price}</div>
+          </Btn>
+        ))}
       </div>
     </div>
   );

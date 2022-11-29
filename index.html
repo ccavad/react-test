@@ -9,10 +9,22 @@
     integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Vite + React</title>
+  <style>
+    @media (min-width: 1000px) {
+      .fallback {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
   <div id="root"></div>
+  <div class="fallback">
+    <h1>
+      Ekran genişliyi 1000 pikseldən aşağı olmamalıdır
+    </h1>
+  </div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

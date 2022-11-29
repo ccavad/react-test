@@ -37,12 +37,19 @@ path.lost {
   position: relative;
 }
 
+@media (max-width: 1000px) {
+  .App {
+    display: none;
+  }
+}
+
 .btn-price {
   font-size: .8rem;
   background-color: green;
   color: white;
   padding: 0 1rem;
   border-radius: 6px;
+  margin-top: 3px;
 }
 
 .btn-price::before {

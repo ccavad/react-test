@@ -14,3 +14,6 @@ app -
     xerite
     idare paneli
   
+her bir regionun zone statei olur.
+region ucun zona secildikde hemin zonanin store deyeri zonestate-e yazilir
+zonada edilen her deyisiklik zonestate ucun de deyisir

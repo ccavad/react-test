@@ -5,20 +5,16 @@ import Tooltip from "./components/Tooltip";
 import Modal from "./components/Modal";
 import Header from "./components/Header";
 import { useSelector, useDispatch } from "react-redux";
-import { setZone } from "./features/regionsSlice";
-import {
-  increment,
-  oneUp,
-  makeHappy,
-  nextTurnDp,
-  startValues,
-} from "./features/resourcesSlice";
+import { nextTurnDp } from "./features/resourcesSlice";
 import RegionPanel from "./components/RegionPanel";
 import { NextBtn } from "./components/ButtonComponents";
+import GameStateModal from "./components/GameStateModal";
+import RulesModal from "./components/RulesModal";
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [regionId, setRegionId] = useState(8);
+  const [rulesModal, setRulesModal] = useState(false);
   const [mousePos, setMousePos] = useState({
     x: "",
     y: "",
@@ -29,19 +25,7 @@ function App() {
   const Regions = useSelector((state) => state.regions.value);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (happiness > 100) {
-  //     setHappiness(100);
-  //   }
-  //   if (happiness < 0) {
-  //     setHappiness(0);
-  //   }
-  // }, [happiness]);
-
-  useEffect(() => {
-    console.log("Start");
-    dispatch(startValues());
-  }, []);
+  const gameState = useSelector((state) => state.resources.value.gameState);
 
   function nextTurn() {
     setLoading(true);
@@ -51,14 +35,12 @@ function App() {
     }, 500);
   }
 
-  function zoneHandler(zone) {
-    dispatch(setZone(zone));
-  }
-
   return (
     <div className="App">
+      {gameState !== "playing" && <GameStateModal state={gameState} />}
       {loading && <Modal />}
-      <Header />
+      {rulesModal && <RulesModal setRulesModal={setRulesModal} />}
+      <Header setRulesModal={setRulesModal} />
       <Map
         regions={Regions}
         regionId={regionId}

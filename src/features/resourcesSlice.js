@@ -86,14 +86,14 @@ export const resourcesSlice = createSlice({
           value.gameState = "occupation";
         }
       }
-      if (value.food.amount > 0) {
-        value.people++;
-        value.food.perTurn--;
-      } else {
+      if (value.food.amount <= 0) {
         value.gameState = "hunger";
       }
       value.happiness =
-        100 - value.people * 2 + Math.floor(value.culture.amount / 3);
+        100 -
+        value.people * 2 +
+        Math.floor(value.culture.amount / 3) -
+        Math.floor(value.turn / 3);
       if (value.happiness < 0) {
         value.happiness = 0;
         value.gameState = "unhappy";
@@ -101,6 +101,8 @@ export const resourcesSlice = createSlice({
       // xoxbextlikden asili olaraq ne qeder vergi gelecek
       if (value.happiness > 65) {
         value.money.taxes = value.people * 2;
+        value.people++;
+        value.food.perTurn--;
       } else if (value.happiness < 35) {
         value.money.taxes = 0;
       } else {
@@ -111,6 +113,9 @@ export const resourcesSlice = createSlice({
         value.money.zoneIncome -
         value.army +
         value.money.tourism * Math.ceil(value.culture.amount / 20);
+      if (value.people === 100) {
+        value.gameState = "won";
+      }
     },
   },
 });

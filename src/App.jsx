@@ -4,16 +4,17 @@ import Map from "./components/Map";
 import Tooltip from "./components/Tooltip";
 import Modal from "./components/Modal";
 import Header from "./components/Header";
-import Agriculture from "./components/zones/Agriculture";
 import { useSelector, useDispatch } from "react-redux";
 import { nextTurnDp } from "./features/resourcesSlice";
 import RegionPanel from "./components/RegionPanel";
 import { NextBtn } from "./components/ButtonComponents";
 import GameStateModal from "./components/GameStateModal";
+import RulesModal from "./components/RulesModal";
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [regionId, setRegionId] = useState(8);
+  const [rulesModal, setRulesModal] = useState(false);
   const [mousePos, setMousePos] = useState({
     x: "",
     y: "",
@@ -23,22 +24,8 @@ function App() {
 
   const Regions = useSelector((state) => state.regions.value);
   const dispatch = useDispatch();
-  const money = useSelector((state) => state.resources.value.money);
+
   const gameState = useSelector((state) => state.resources.value.gameState);
-
-  // useEffect(() => {
-  //   if (happiness > 100) {
-  //     setHappiness(100);
-  //   }
-  //   if (happiness < 0) {
-  //     setHappiness(0);
-  //   }
-  // }, [happiness]);
-
-  useEffect(() => {
-    console.log("Start");
-    console.log(money);
-  }, []);
 
   function nextTurn() {
     setLoading(true);
@@ -52,7 +39,8 @@ function App() {
     <div className="App">
       {gameState !== "playing" && <GameStateModal state={gameState} />}
       {loading && <Modal />}
-      <Header />
+      {rulesModal && <RulesModal setRulesModal={setRulesModal} />}
+      <Header setRulesModal={setRulesModal} />
       <Map
         regions={Regions}
         regionId={regionId}
@@ -60,7 +48,6 @@ function App() {
         setMousePos={setMousePos}
       />
       <Tooltip mousePos={mousePos} />
-      {/* <Agriculture /> */}
       <RegionPanel id={regionId} />
       <div
         className="nextbtncont"

@@ -18,7 +18,7 @@ function RegionPanel({ id }) {
   let currentReg = regions[id];
 
   return (
-    <div>
+    <div style={{ padding: " 1rem 2rem" }}>
       <h1>{currentReg.ad}</h1>
       {!currentReg.zone && <ZoneSelect id={id} />}
       {currentReg.zone === "kənd təsərrüfatı" && (
@@ -127,7 +127,13 @@ function ZoneSelect({ id }) {
     <>
       <div>
         <h2>Bu regionda nə sektoru quracaqsan?</h2>
-        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "1rem",
+            flexWrap: "wrap",
+          }}
+        >
           <BtnGeneral onClick={() => zoneHandler("agr", 30)}>
             Kənd təsərrüfatı
             <div className="btn-price">30</div>
@@ -148,9 +154,9 @@ function ZoneSelect({ id }) {
             Turizm Sektoru
             <div className="btn-price">80</div>
           </BtnGeneral>
-          <BtnGeneral onClick={() => zoneHandler("tra", 100)}>
+          <BtnGeneral onClick={() => zoneHandler("tra", 50)}>
             Ticarət Zonası
-            <div className="btn-price">100</div>
+            <div className="btn-price">50</div>
           </BtnGeneral>
           <BtnGeneral onClick={() => zoneHandler("soc", 50)}>
             Sosial Zona

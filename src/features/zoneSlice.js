@@ -69,7 +69,7 @@ const initialState = {
         name: "polis bölməsi",
         completed: false,
         price: 40,
-        adding: 4,
+        adding: 3,
       },
       {
         name: "mall",

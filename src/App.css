@@ -37,6 +37,12 @@ path.lost {
   position: relative;
 }
 
+@media (max-width: 1000px) {
+  body {
+    display: none;
+  }
+}
+
 .btn-price {
   font-size: .8rem;
   background-color: green;

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
-function Header() {
+function Header({ setRulesModal }) {
   const { food, oil, money, people, happiness, culture, army, defence, turn } =
     useSelector((state) => state.resources.value);
 
@@ -50,7 +50,7 @@ function Header() {
         ) : (
           ""
         )}
-        <Amount>{happiness}%</Amount>
+        <Amount>{happiness}</Amount>
       </HeaderResource>
       <HeaderResource>
         <i className="fa-solid fa-palette"></i>
@@ -66,10 +66,9 @@ function Header() {
         <i className="fa-solid fa-person-military-rifle"></i>
         <Amount>{army}</Amount>
       </HeaderResource>
-      {/* <HeaderResource>
-        <i className="fa-solid fa-shield"></i>
-        <Amount>{defence}</Amount>
-      </HeaderResource> */}
+      <Rules>
+        <button onClick={() => setRulesModal(true)}>Qaydalar</button>
+      </Rules>
       <Amount>Tur: {turn}</Amount>
     </HeaderStyled>
   );
@@ -78,10 +77,10 @@ function Header() {
 const HeaderStyled = styled.header`
   grid-column: span 2;
   background-color: #092235;
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
   color: white;
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: center;
 `;
 
@@ -98,6 +97,27 @@ const Amount = styled.span`
   gap: 0.2rem;
   justify-content: flex-end;
   flex: 1;
+`;
+
+const Rules = styled.div`
+  flex: 3;
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    background: white;
+    border: 0;
+    color: #092235;
+    padding: 10px 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    transition: 0.4s;
+
+    &:hover {
+      box-shadow: rgb(255 244 244 / 24%) 0px 3px 8px;
+    }
+  }
 `;
 
 const PerTurn = styled.span`

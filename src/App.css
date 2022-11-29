@@ -38,7 +38,7 @@ path.lost {
 }
 
 @media (max-width: 1000px) {
-  body {
+  .App {
     display: none;
   }
 }
